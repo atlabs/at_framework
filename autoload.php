@@ -1,8 +1,4 @@
 <?php
-/**
- * Автоматическая загрузка классов
- * @param подгружаемый класс
- */
 function autoload($class)
 {
 	$file = $class . '.php';
@@ -13,10 +9,6 @@ function autoload($class)
 	}
 }
 
-/**
- * Поиск классов
- * @param название файла
- */
 function find($file)
 {
 	$dir_core = dirname(__FILE__) . '/at_core/';
