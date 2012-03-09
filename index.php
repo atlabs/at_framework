@@ -10,5 +10,5 @@ core::init();
 
 $fin = microtime(true);
 
-echo '<br>'.($fin-$start);
+echo '<br>' . ($fin - $start);
 ?>
