@@ -156,5 +156,16 @@ class String
 
 		return $date;
 	}
+	
+	public static function t($str)
+	{
+		//init lang
+		//load i18n lang pack
+		
+		if(isset($lang['message'][$str]))
+		{
+			return $lang['message'][$str];
+		}
+	}
 }
 ?>
