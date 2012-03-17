@@ -1,5 +1,5 @@
 <?php
-class Request
+class AT_Request
 {
 	const GET = 'GET';
 	const POST = 'POST';
@@ -29,7 +29,7 @@ class Request
 
 	public static function init()
 	{
-		self::$protocol = (core::$serv->https) ? self::HTTPS : self::HTTP;
+		self::$protocol = (isset(core::$serv->https)) ? self::HTTPS : self::HTTP;
 
 		self::$subdomain = '';
 
@@ -58,14 +58,14 @@ class Request
 
 		if(method_exists(self::$controller, 'before'))
 		{
-			call_user_method('before', self::$controller);
+			call_user_func(self::$controller . '::before');
 		}
 
-		call_user_method(self::$action, self::$controller);
+		call_user_func(self::$controller . '::' . self::$action);
 
 		if(method_exists(self::$controller, 'after'))
 		{
-			call_user_method('after', self::$controller);
+			call_user_func(self::$controller . '::after');
 		}
 	}
 }

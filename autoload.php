@@ -6,6 +6,7 @@ function autoload($class)
 	if(find($file))
 	{
 		include_once find($file);
+		class_alias('AT_'.$class, $class);
 	}
 }
 
@@ -20,7 +21,7 @@ function find($file)
 
 	$dir_app = dirname(__FILE__) . '/admin/controller/';
 
-	if(file_exists($dir_core . $file))
+	if(file_exists($dir_app . $file))
 	{
 		return $dir_app . $file;
 	}

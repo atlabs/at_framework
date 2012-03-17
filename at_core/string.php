@@ -1,5 +1,5 @@
 <?php
-class String
+class AT_String
 {
 	public static function translit($str)
 	{

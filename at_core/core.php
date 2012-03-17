@@ -16,6 +16,8 @@ class Core
 			return true;
 		}
 
+		spl_autoload_register('autoload');
+
 		register_shutdown_function(function ()
 		{
 			return core::shutdown_handler();
@@ -23,12 +25,12 @@ class Core
 
 		set_exception_handler(function (Exception $e)
 		{
-			return error::exception_handler($e);
+			echo 'exception '.$e; exit;
 		});
 
 		set_error_handler(function ($severity, $message, $filepath, $line)
 		{
-			return error::error_handler($severity, $message, $filepath, $line);
+			echo 'error: '.$severity . ' '.$message.' '.$filepath.' '.$line;
 		});
 
 		self::$serv = (object)array_change_key_case($_SERVER, CASE_LOWER);
@@ -42,7 +44,7 @@ class Core
 	{
 		if ($last_error = error_get_last())
 		{
-			error::error($last_error);
+			//error::error($last_error);
 		}
 	}
 }
