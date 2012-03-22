@@ -1,6 +1,6 @@
 <?php
 
-class Core
+class ATCore
 {
 	public static $root = '';
 
@@ -20,7 +20,7 @@ class Core
 
 		register_shutdown_function(function ()
 		{
-			return core::shutdown_handler();
+			return ATCore::shutdown_handler();
 		});
 
 		set_exception_handler(function (Exception $e)
@@ -37,7 +37,7 @@ class Core
 
 		self::$root = dirname(__FILE__) . '/at_core';
 
-		request::init();
+		ATCore_Request::init();
 	}
 
 	public static function shutdown_handler()

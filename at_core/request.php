@@ -1,5 +1,5 @@
 <?php
-class AT_Request
+class ATCore_Request
 {
 	const GET = 'GET';
 	const POST = 'POST';
@@ -26,22 +26,21 @@ class AT_Request
 
 	public static $params = '';
 
-
 	public static function init()
 	{
-		self::$protocol = (isset(core::$serv->https)) ? self::HTTPS : self::HTTP;
+		self::$protocol = (isset(ATCore::$serv->https)) ? self::HTTPS : self::HTTP;
 
 		self::$subdomain = '';
 
-		self::$domain = core::$serv->http_host;
+		self::$domain = ATCore::$serv->http_host;
 
-		self::$post = core::$serv->server_port;
+		self::$post = ATCore::$serv->server_port;
 
-		self::$ip = core::$serv->remote_addr;
+		self::$ip = ATCore::$serv->remote_addr;
 
-		self::$agent = core::$serv->http_user_agent;
+		self::$agent = ATCore::$serv->http_user_agent;
 
-		self::$uri = core::$serv->request_uri;
+		self::$uri = ATCore::$serv->request_uri;
 
 		$arr_uri = array_slice(explode('/', self::$uri), 1);
 		$arr_uri = array_diff($arr_uri, array(''));
@@ -52,7 +51,7 @@ class AT_Request
 			self::$action = $arr_uri[1];
 		}
 
-		include_once core::$serv->document_root . '/admin/controller/' . self::$controller . '.php';
+		include_once ATCore::$serv->document_root . '/admin/controller/' . self::$controller . '.php';
 
 		self::$controller = 'Controller_' . self::$controller;
 

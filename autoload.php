@@ -1,12 +1,12 @@
 <?php
 function autoload($class)
 {
-	$file = $class . '.php';
+	$file = strtolower(str_replace('ATCore_', '', $class)) . '.php';
 
 	if(find($file))
 	{
-		include_once find($file);
-		class_alias('AT_'.$class, $class);
+		require_once find($file);
+
 	}
 }
 

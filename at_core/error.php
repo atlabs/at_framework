@@ -1,5 +1,5 @@
 <?php
-class AT_Error
+class ATCore_Error
 {
 
 }

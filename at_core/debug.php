@@ -1,6 +1,6 @@
 <?php
 
-class AT_Debug
+class ATCore_Debug
 {
 	public static $data = array();
 
@@ -22,12 +22,22 @@ class AT_Debug
 
 	public static function stop($token, array $result = array())
 	{
+		$end_time = microtime(true);
+		$end_memory =  memory_get_usage(true);
+
 		$end_data = array(
-			'end_time' 		=> microtime(true),
-			'end_memory' 	=> memory_get_usage(),
+			'end_time' 		=> $end_time,
+			'end_memory' 	=> $end_memory,
 			'result' 		=> $result
 		);
 
 		static::$data[$token][static::$group[$token]] = array_merge(static::$data[$token][static::$group[$token]], $end_data);
+
+		$start_time = static::$data[$token][static::$group[$token]]['start_time'];
+		$start_memory = static::$data[$token][static::$group[$token]]['start_memory'];
+
+		static::$data[$token][static::$group[$token]]['total_time'] = $end_time - $start_time;
+		static::$data[$token][static::$group[$token]]['total_memory'] = $end_memory - $start_memory;
+
 	}
 }
